@@ -1,4 +1,4 @@
-package com.alibou.security.auth;
+package com.RentCars.RentCars.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegisterRequest {
 
+  private String firstname;
+  private String lastname;
   private String email;
-  String password;
+  private String password;
 }

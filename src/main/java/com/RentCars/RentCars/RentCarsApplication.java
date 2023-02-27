@@ -1,13 +1,13 @@
-package com.alibou.security;
+package com.RentCars.RentCars;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SecurityApplication {
+public class RentCarsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SecurityApplication.class, args);
+		SpringApplication.run(RentCarsApplication.class, args);
 	}
 
 }

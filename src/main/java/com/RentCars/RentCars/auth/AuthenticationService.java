@@ -1,12 +1,12 @@
-package com.alibou.security.auth;
+package com.RentCars.RentCars.auth;
 
-import com.alibou.security.config.JwtService;
-import com.alibou.security.token.Token;
-import com.alibou.security.token.TokenRepository;
-import com.alibou.security.token.TokenType;
-import com.alibou.security.user.Role;
-import com.alibou.security.user.User;
-import com.alibou.security.user.UserRepository;
+import com.RentCars.RentCars.config.JwtService;
+import com.RentCars.RentCars.token.Token;
+import com.RentCars.RentCars.token.TokenRepository;
+import com.RentCars.RentCars.token.TokenType;
+import com.RentCars.RentCars.user.Role;
+import com.RentCars.RentCars.user.User;
+import com.RentCars.RentCars.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

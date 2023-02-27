@@ -1,4 +1,4 @@
-package com.alibou.security.user;
+package com.RentCars.RentCars.user;
 
 public enum Role {
 

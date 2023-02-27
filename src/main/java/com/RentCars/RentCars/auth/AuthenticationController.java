@@ -1,4 +1,4 @@
-package com.alibou.security.auth;
+package com.RentCars.RentCars.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

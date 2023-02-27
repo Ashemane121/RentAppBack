@@ -1,6 +1,6 @@
-package com.alibou.security.config;
+package com.RentCars.RentCars.config;
 
-import com.alibou.security.user.UserRepository;
+import com.RentCars.RentCars.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

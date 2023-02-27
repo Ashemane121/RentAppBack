@@ -1,6 +1,6 @@
-package com.alibou.security.token;
+package com.RentCars.RentCars.token;
 
-import com.alibou.security.user.User;
+import com.RentCars.RentCars.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
