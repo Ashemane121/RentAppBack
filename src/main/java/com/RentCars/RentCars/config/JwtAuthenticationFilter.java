@@ -1,6 +1,6 @@
 package com.RentCars.RentCars.config;
 
-import com.RentCars.RentCars.token.TokenRepository;
+import com.RentCars.RentCars.persistances.repositories.TokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

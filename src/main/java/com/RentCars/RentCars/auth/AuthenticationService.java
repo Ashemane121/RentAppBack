@@ -1,12 +1,12 @@
 package com.RentCars.RentCars.auth;
 
 import com.RentCars.RentCars.config.JwtService;
-import com.RentCars.RentCars.token.Token;
-import com.RentCars.RentCars.token.TokenRepository;
-import com.RentCars.RentCars.token.TokenType;
-import com.RentCars.RentCars.user.Role;
-import com.RentCars.RentCars.user.User;
-import com.RentCars.RentCars.user.UserRepository;
+import com.RentCars.RentCars.entities.Token;
+import com.RentCars.RentCars.persistances.repositories.TokenRepository;
+import com.RentCars.RentCars.entities.TokenType;
+import com.RentCars.RentCars.entities.Role;
+import com.RentCars.RentCars.entities.User;
+import com.RentCars.RentCars.persistances.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

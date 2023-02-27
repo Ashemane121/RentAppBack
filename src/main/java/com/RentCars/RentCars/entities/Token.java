@@ -1,6 +1,5 @@
-package com.RentCars.RentCars.token;
+package com.RentCars.RentCars.entities;
 
-import com.RentCars.RentCars.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
