@@ -17,10 +17,10 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_rental;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String payment_method;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String status;
 
     @OneToOne
