@@ -10,6 +10,7 @@ import com.RentCars.RentCars.persistances.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,71 @@ public class AuthenticationService {
         .token(jwtToken)
         .build();
   }
+
+  public AuthenticationResponse update(UpdateRequest request) {
+    // Find the user by email
+    var user = repository.findByEmail(request.getEmail())
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+    // Update the user details
+    user.setFirstname(request.getFirstname());
+    user.setLastname(request.getLastname());
+    // user.setPassword(passwordEncoder.encode(request.getPassword()));
+    user.setPhone(request.getPhone());
+    user.setAddress(request.getAddress());
+    // Save the updated user details
+    var savedUser = repository.save(user);
+    // Revoke all the user's existing tokens
+    revokeAllUserTokens(user);
+    // Generate a new token for the user
+    var jwtToken = jwtService.generateToken(user);
+    // Save the token in the database
+    saveUserToken(savedUser, jwtToken);
+    // Return the authentication response containing the new token
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
+  }
+
+  public AuthenticationResponse updateEmail(UpdateEmailRequest request) {
+    // Find the user by email
+    var user = repository.findByEmail(request.getOldEmail())
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getOldEmail()));
+    // Update the user's email
+    user.setEmail(request.getNewEmail());
+    // Save the updated user details
+    var savedUser = repository.save(user);
+    // Revoke all the user's existing tokens
+    revokeAllUserTokens(user);
+    // Generate a new token for the user
+    var jwtToken = jwtService.generateToken(user);
+    // Save the token in the database
+    saveUserToken(savedUser, jwtToken);
+    // Return the authentication response containing the new token
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
+  }
+
+  public AuthenticationResponse updatePassword(UpdatePasswordRequest request) {
+    // Find the user by email
+    var user = repository.findByEmail(request.getEmail())
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+    // Update the user's password
+    user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+    // Save the updated user details
+    var savedUser = repository.save(user);
+    // Revoke all the user's existing tokens
+    revokeAllUserTokens(user);
+    // Generate a new token for the user
+    var jwtToken = jwtService.generateToken(user);
+    // Save the token in the database
+    saveUserToken(savedUser, jwtToken);
+    // Return the authentication response containing the new token
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
+  }
+
 
   private void saveUserToken(User user, String jwtToken) {
     var token = Token.builder()

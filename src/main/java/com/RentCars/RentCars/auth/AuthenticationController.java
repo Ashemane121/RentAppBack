@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -40,6 +37,31 @@ public class AuthenticationController {
     logoutService.logout(request, response, authentication);
     return ResponseEntity.ok().build();
   }
+
+  @PostMapping("/update")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<AuthenticationResponse> update(
+          @RequestBody UpdateRequest request
+  ) {
+    return ResponseEntity.ok(service.update(request));
+  }
+
+  @PostMapping("/updateEmail")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<AuthenticationResponse> updateEmail(
+          @RequestBody UpdateEmailRequest request
+  ) {
+    return ResponseEntity.ok(service.updateEmail(request));
+  }
+
+  @PostMapping("/updatePassword")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<AuthenticationResponse> updatePassword(
+          @RequestBody UpdatePasswordRequest request
+  ) {
+    return ResponseEntity.ok(service.updatePassword(request));
+  }
+
 
 
 }
