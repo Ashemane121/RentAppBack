@@ -24,6 +24,11 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
+    // Check if the email is already used
+    if (repository.findByEmail(request.getEmail()).isPresent()) {
+      throw new IllegalArgumentException("Email address is already in use");
+    }
+    // Create a new user with the provided data
     var user = User.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
@@ -118,6 +123,32 @@ public class AuthenticationService {
     return AuthenticationResponse.builder()
             .token(jwtToken)
             .build();
+  }
+
+  public void deleteAccount(String email) {
+    var user = repository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    repository.delete(user);
+    revokeAllUserTokens(user);
+  }
+
+  public GetUserByEmailResponse getUserByEmail(String email) {
+    var user = repository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+
+    //Get user's properties
+    return GetUserByEmailResponse.builder()
+            .firstname(user.getFirstname())
+            .lastname(user.getLastname())
+            .email(user.getEmail())
+            .address(user.getAddress())
+            .phone(user.getPhone())
+            .build();
+
+  }
+
+  public boolean isEmailExists(String email) {
+    return repository.findByEmail(email).isPresent();
   }
 
 

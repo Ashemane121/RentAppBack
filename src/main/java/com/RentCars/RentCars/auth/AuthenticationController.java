@@ -1,6 +1,7 @@
 package com.RentCars.RentCars.auth;
 
 import com.RentCars.RentCars.config.LogoutService;
+import com.RentCars.RentCars.entities.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,37 @@ public class AuthenticationController {
           @RequestBody UpdatePasswordRequest request
   ) {
     return ResponseEntity.ok(service.updatePassword(request));
+  }
+
+  @DeleteMapping("/deleteAccount")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<?> deleteAccount(Authentication authentication) {
+    String email = authentication.getName();
+    service.deleteAccount(email);
+    return ResponseEntity.ok().build();
+  }
+
+  /*
+  @GetMapping("/user")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+    return ResponseEntity.ok(service.getUserByEmail(email));
+  }*/
+
+  @GetMapping("/user")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<GetUserByEmailResponse> getUserByEmail(@RequestParam String email) {
+    return ResponseEntity.ok(service.getUserByEmail(email));
+  }
+
+  @GetMapping("/checkEmail")
+  public ResponseEntity<Void> checkEmail(@RequestParam String email) {
+    boolean emailExists = service.isEmailExists(email);
+    if (emailExists) {
+      return ResponseEntity.ok().build();
+    } else {
+      return ResponseEntity.badRequest().build();
+    }
   }
 
 
