@@ -9,6 +9,7 @@ import com.RentCars.RentCars.persistances.entities.User;
 import com.RentCars.RentCars.persistances.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,21 +45,63 @@ public class AuthenticationService {
         .build();
   }
 
+  public AuthenticationResponse registerAdmin(RegisterRequest request) {
+    // Check if the email is already used
+    if (repository.findByEmail(request.getEmail()).isPresent()) {
+      throw new IllegalArgumentException("Email address is already in use");
+    }
+    // Create a new user with the provided data
+    var user = User.builder()
+            .firstname(request.getFirstname())
+            .lastname(request.getLastname())
+            .email(request.getEmail())
+            .password(passwordEncoder.encode(request.getPassword()))
+            .role(Role.ADMIN)
+            .build();
+    var savedUser = repository.save(user);
+    var jwtToken = jwtService.generateToken(user);
+    saveUserToken(savedUser, jwtToken);
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
+  }
+
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
     authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            request.getEmail(),
-            request.getPassword()
-        )
+            new UsernamePasswordAuthenticationToken(
+                    request.getEmail(),
+                    request.getPassword()
+            )
     );
     var user = repository.findByEmail(request.getEmail())
-        .orElseThrow();
+            .orElseThrow();
     var jwtToken = jwtService.generateToken(user);
     revokeAllUserTokens(user);
     saveUserToken(user, jwtToken);
     return AuthenticationResponse.builder()
-        .token(jwtToken)
-        .build();
+            .token(jwtToken)
+            .build();
+  }
+
+  public AuthenticationResponse authenticateAdmin(AuthenticationRequest request) {
+    authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                    request.getEmail(),
+                    request.getPassword()
+            )
+    );
+    var user = repository.findByEmail(request.getEmail())
+            .orElseThrow();
+    // check the user's role
+    if (!user.getRole().equals(Role.ADMIN)) {
+      throw new BadCredentialsException("Invalid credentials");
+    }
+    var jwtToken = jwtService.generateToken(user);
+    revokeAllUserTokens(user);
+    saveUserToken(user, jwtToken);
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
   }
 
   public AuthenticationResponse update(UpdateRequest request) {

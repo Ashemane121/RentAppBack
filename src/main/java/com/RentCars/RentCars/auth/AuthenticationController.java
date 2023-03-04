@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -24,11 +24,26 @@ public class AuthenticationController {
   ) {
     return ResponseEntity.ok(service.register(request));
   }
+
+  @PostMapping("/admin/register")
+  public ResponseEntity<AuthenticationResponse> registerAdmin(
+          @RequestBody RegisterRequest request
+  ) {
+    return ResponseEntity.ok(service.registerAdmin(request));
+  }
+
   @PostMapping("/authenticate")
   public ResponseEntity<AuthenticationResponse> authenticate(
-      @RequestBody AuthenticationRequest request
+          @RequestBody AuthenticationRequest request
   ) {
     return ResponseEntity.ok(service.authenticate(request));
+  }
+
+  @PostMapping("/admin/authenticate")
+  public ResponseEntity<AuthenticationResponse> authenticateAdmin(
+          @RequestBody AuthenticationRequest request
+  ) {
+    return ResponseEntity.ok(service.authenticateAdmin(request));
   }
 
   @PostMapping("/logout")
