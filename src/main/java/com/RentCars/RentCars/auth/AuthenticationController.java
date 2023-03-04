@@ -1,7 +1,6 @@
 package com.RentCars.RentCars.auth;
 
 import com.RentCars.RentCars.config.LogoutService;
-import com.RentCars.RentCars.entities.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

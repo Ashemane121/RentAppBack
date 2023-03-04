@@ -1,4 +1,4 @@
-package com.RentCars.RentCars.entities;
+package com.RentCars.RentCars.persistances.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

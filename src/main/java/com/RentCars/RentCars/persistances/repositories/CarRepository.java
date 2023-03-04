@@ -1,7 +1,7 @@
 package com.RentCars.RentCars.persistances.repositories;
 
-import com.RentCars.RentCars.entities.Car;
-import com.RentCars.RentCars.entities.User;
+import com.RentCars.RentCars.persistances.entities.Car;
+import com.RentCars.RentCars.persistances.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
