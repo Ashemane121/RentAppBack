@@ -1,11 +1,11 @@
 package com.RentCars.RentCars.auth;
 
 import com.RentCars.RentCars.config.LogoutService;
-import com.RentCars.RentCars.entities.PasswordResetToken;
-import com.RentCars.RentCars.entities.User;
+import com.RentCars.RentCars.persistances.entities.PasswordResetToken;
+import com.RentCars.RentCars.persistances.entities.User;
 import com.RentCars.RentCars.persistances.repositories.UserRepository;
-import com.RentCars.RentCars.persistances.services.EmailService;
-import com.RentCars.RentCars.persistances.services.PasswordResetTokenService;
+import com.RentCars.RentCars.services.EmailService;
+import com.RentCars.RentCars.services.PasswordResetTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/auth")

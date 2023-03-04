@@ -1,37 +1,33 @@
-package com.RentCars.RentCars.entities;
+package com.RentCars.RentCars.persistances.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "password_reset_tokens")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PasswordResetToken {
-
+public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_rating;
 
     @Column(nullable = false)
-    private String email;
+    private Integer stars;
 
     @Column(nullable = false)
-    private String token;
+    private String comment;
 
     @Column(nullable = false)
-    private LocalDateTime expirationDate;
+    private String type;
 
-    public PasswordResetToken(String email, String resetToken, LocalDateTime plusMinutes) {
-    }
+    @OneToOne(mappedBy = "rating")
+    @JsonIgnore
+    private Rental rental;
+
 }
-
-
-

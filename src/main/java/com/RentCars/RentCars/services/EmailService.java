@@ -1,4 +1,4 @@
-package com.RentCars.RentCars.persistances.services;
+package com.RentCars.RentCars.services;
 
 public interface EmailService {
     void sendEmail(String to, String subject, String body);

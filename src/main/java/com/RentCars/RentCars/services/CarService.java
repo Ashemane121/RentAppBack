@@ -1,6 +1,6 @@
-package com.RentCars.RentCars.persistances.services;
+package com.RentCars.RentCars.services;
 
-import com.RentCars.RentCars.entities.Car;
+import com.RentCars.RentCars.persistances.entities.Car;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.RentCars.RentCars.controllers;
 
-import com.RentCars.RentCars.entities.InsuranceClaim;
-import com.RentCars.RentCars.entities.Rental;
-import com.RentCars.RentCars.persistances.services.InsuranceClaimService;
-import com.RentCars.RentCars.persistances.services.RentalService;
+import com.RentCars.RentCars.persistances.entities.InsuranceClaim;
+import com.RentCars.RentCars.persistances.entities.Rental;
+import com.RentCars.RentCars.services.InsuranceClaimService;
+import com.RentCars.RentCars.services.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

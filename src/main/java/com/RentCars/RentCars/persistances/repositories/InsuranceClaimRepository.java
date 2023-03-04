@@ -1,6 +1,6 @@
 package com.RentCars.RentCars.persistances.repositories;
 
-import com.RentCars.RentCars.entities.InsuranceClaim;
+import com.RentCars.RentCars.persistances.entities.InsuranceClaim;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

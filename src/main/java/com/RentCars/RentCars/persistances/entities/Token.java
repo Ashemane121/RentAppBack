@@ -1,4 +1,4 @@
-package com.RentCars.RentCars.entities;
+package com.RentCars.RentCars.persistances.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

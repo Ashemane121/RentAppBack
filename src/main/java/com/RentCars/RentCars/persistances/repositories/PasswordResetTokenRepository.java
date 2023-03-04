@@ -1,6 +1,6 @@
 package com.RentCars.RentCars.persistances.repositories;
 
-import com.RentCars.RentCars.entities.PasswordResetToken;
+import com.RentCars.RentCars.persistances.entities.PasswordResetToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

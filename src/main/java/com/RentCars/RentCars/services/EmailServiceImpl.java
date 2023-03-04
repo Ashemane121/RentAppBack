@@ -1,4 +1,4 @@
-package com.RentCars.RentCars.persistances.services;
+package com.RentCars.RentCars.services;
 
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
