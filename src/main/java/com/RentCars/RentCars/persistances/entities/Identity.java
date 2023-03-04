@@ -7,34 +7,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+public class Identity {
 
-public class InsuranceClaim {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_insurance;
+    private Long id_identity;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    private String path;
 
     @Column
-    private String description;
+    private String status;
 
-    @Column(nullable = false)
-    private String amount;
-
-    @OneToOne
-    @JoinColumn(name = "rental_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     @JsonIgnore
-    private Rental rental;
-
+    private User user;
 
 
 }
+

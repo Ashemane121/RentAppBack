@@ -53,7 +53,6 @@ public class RentalController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         existingRental.setStatus(rental.getStatus());
-        existingRental.setPayment_method(rental.getPayment_method());
         rentalService.updateRental(existingRental);
         return new ResponseEntity<>(HttpStatus.OK);
     }

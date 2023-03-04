@@ -1,6 +1,6 @@
 package com.RentCars.RentCars.services;
 
-import com.RentCars.RentCars.persistances.entities.Car;
+import com.RentCars.RentCars.persistances.entities.Post;
 import com.RentCars.RentCars.persistances.entities.Request;
 import com.RentCars.RentCars.persistances.entities.User;
 
@@ -12,7 +12,7 @@ public interface RequestService {
 
     List<Request> getRequestsByUser(User user);
 
-    List<Request> getRequestsByCar(Car car);
+    List<Request> getRequestsByPost(Post post);
 
     List<Request> getRequestsByStatus(String status);
 

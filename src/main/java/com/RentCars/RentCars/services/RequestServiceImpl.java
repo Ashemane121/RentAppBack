@@ -1,6 +1,6 @@
 package com.RentCars.RentCars.services;
 
-import com.RentCars.RentCars.persistances.entities.Car;
+import com.RentCars.RentCars.persistances.entities.Post;
 import com.RentCars.RentCars.persistances.entities.Request;
 import com.RentCars.RentCars.persistances.entities.User;
 import com.RentCars.RentCars.persistances.repositories.RequestRepository;
@@ -26,8 +26,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<Request> getRequestsByCar(Car car) {
-        return requestRepository.findByCar(car);
+    public List<Request> getRequestsByPost(Post post) {
+        return requestRepository.findByPost(post);
     }
 
     @Override

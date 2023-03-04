@@ -54,7 +54,6 @@ public class RatingController {
         }
         existingRating.setStars(rating.getStars());
         existingRating.setComment(rating.getComment());
-        existingRating.setType(rating.getType());
         ratingService.updateRating(existingRating);
         return new ResponseEntity<>(HttpStatus.OK);
     }

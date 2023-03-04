@@ -70,13 +70,6 @@ public class AuthenticationController {
     return ResponseEntity.ok().build();
   }
 
-  /*
-  @GetMapping("/user")
-  @PreAuthorize("isAuthenticated()")
-  public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
-    return ResponseEntity.ok(service.getUserByEmail(email));
-  }*/
-
   @GetMapping("/user")
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<GetUserByEmailResponse> getUserByEmail(@RequestParam String email) {

@@ -1,6 +1,6 @@
 package com.RentCars.RentCars.persistances.repositories;
 
-import com.RentCars.RentCars.persistances.entities.Car;
+import com.RentCars.RentCars.persistances.entities.Post;
 import com.RentCars.RentCars.persistances.entities.Request;
 import com.RentCars.RentCars.persistances.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +13,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<Request> findByUser(User user);
 
-    List<Request> findByCar(Car car);
+    List<Request> findByPost(Post post);
 
     List<Request> findByStatus(String status);
 

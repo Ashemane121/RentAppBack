@@ -1,9 +1,9 @@
 package com.RentCars.RentCars.controllers;
 
-import com.RentCars.RentCars.persistances.entities.Car;
+import com.RentCars.RentCars.persistances.entities.Post;
 import com.RentCars.RentCars.persistances.entities.Request;
 import com.RentCars.RentCars.persistances.entities.User;
-import com.RentCars.RentCars.services.CarService;
+import com.RentCars.RentCars.services.PostService;
 import com.RentCars.RentCars.services.RequestService;
 import com.RentCars.RentCars.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class RequestController {
     private RequestService requestService;
 
     @Autowired
-    private CarService carService;
+    private PostService postService;
     @Autowired
     private UserService userService;
 
@@ -40,7 +40,7 @@ public class RequestController {
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
-    /* @GetMapping("/user/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<Request>> getRequestsByUser(@PathVariable Long userId) {
         User user = new User();
         user.setId(userId);
@@ -50,11 +50,11 @@ public class RequestController {
 
 
 
-    @GetMapping("/car/{carId}")
-    public ResponseEntity<List<Request>> getRequestsByCar(@PathVariable Long carId) {
-        Car car = new Car();
-        car.setIdcar(carId);
-        List<Request> requests = requestService.getRequestsByCar(car);
+    @GetMapping("/post/{postId}")
+    public ResponseEntity<List<Request>> getRequestsByPost(@PathVariable Long postId) {
+        Post post = new Post();
+        post.setId_post(postId);
+        List<Request> requests = requestService.getRequestsByPost(post);
         return new ResponseEntity<>(requests, HttpStatus.OK);
     }
 
@@ -63,20 +63,13 @@ public class RequestController {
         List<Request> requests = requestService.getRequestsByStatus(status);
         return new ResponseEntity<>(requests, HttpStatus.OK);
     }
-    */
-    /*@PostMapping
-    public ResponseEntity<Request> createRequest(@RequestBody Request request) {
-        Request createdRequest = requestService.createRequest(request);
-        return new ResponseEntity<>(createdRequest, HttpStatus.CREATED);
-    }
 
-     */
     @PostMapping("/{userId}/{carId}")
     public ResponseEntity<Void> createRequest(@RequestBody Request request , @PathVariable Long userId, @PathVariable Long carId) {
         User user=userService.getUserById(userId);
-        Car car=carService.getCarById(carId);
+        Post post = postService.getPostById(carId);
         request.setUser(user);
-        request.setCar(car);
+        request.setPost(post);
         requestService.createRequest(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -90,6 +83,7 @@ public class RequestController {
         existingRequest.setStart_date(request.getStart_date());
         existingRequest.setEnd_date(request.getEnd_date());
         existingRequest.setStatus(request.getStatus());
+        existingRequest.setPayment_method(request.getPayment_method());
         requestService.updateRequest(existingRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }

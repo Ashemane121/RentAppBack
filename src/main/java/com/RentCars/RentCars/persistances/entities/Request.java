@@ -31,15 +31,18 @@ public class Request {
     @Column(nullable = false)
     private String status;
 
+    @Column(nullable = false)
+    private String payment_method;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "car_id")
+    @JoinColumn(name = "post_id")
     @JsonIgnore
-    private Car car;
+    private Post post;
 
     @OneToOne(mappedBy = "request")
     @JsonIgnore

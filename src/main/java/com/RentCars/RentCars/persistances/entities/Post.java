@@ -15,11 +15,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Car {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_car;
+    private Long id_post;
 
     @Column
     private String brand;
@@ -56,12 +56,15 @@ public class Car {
     @Temporal(TemporalType.DATE)
     private Date end_date;
 
+    @Column
+    private String status;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "car",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "post")
     @JsonIgnore
     private List<Request> requests;
 

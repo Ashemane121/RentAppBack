@@ -20,11 +20,8 @@ public class Rating {
     @Column(nullable = false)
     private Integer stars;
 
-    @Column(nullable = false)
+    @Column
     private String comment;
-
-    @Column(nullable = false)
-    private String type;
 
     @OneToOne(mappedBy = "rating")
     @JsonIgnore

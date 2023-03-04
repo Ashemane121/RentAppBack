@@ -45,13 +45,17 @@ public class User implements UserDetails {
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
 
-  @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "user")
   @JsonIgnore
-  private List<Car> cars;
+  private List<Post> posts;
 
   @OneToMany(mappedBy = "user")
   @JsonIgnore
   private List<Request> requests;
+
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<Identity> identities;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

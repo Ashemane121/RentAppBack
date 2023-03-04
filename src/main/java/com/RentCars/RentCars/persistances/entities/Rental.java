@@ -18,19 +18,12 @@ public class Rental {
     private Long id_rental;
 
     @Column(nullable = false)
-    private String payment_method;
-
-    @Column(nullable = false)
     private String status;
 
     @OneToOne
     @JoinColumn(name = "request_id")
     @JsonIgnore
     private Request request;
-
-    @OneToOne(mappedBy = "rental")
-    @JsonIgnore
-    private InsuranceClaim insuranceClaim;
 
     @OneToOne
     @JoinColumn(name = "rating_id")
