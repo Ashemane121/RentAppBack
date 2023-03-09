@@ -21,13 +21,13 @@ public class PostController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("")
+    @GetMapping("/get/all")
     public ResponseEntity<List<Post>> getAllPosts() {
         List<Post> posts = postService.getAllPosts();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Post> getPostById(@PathVariable Long id) {
         Post post = postService.getPostById(id);
         return new ResponseEntity<>(post, HttpStatus.OK);
