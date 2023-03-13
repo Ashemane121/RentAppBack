@@ -101,6 +101,16 @@ public class AuthenticationController {
     }
   }
 
+  @GetMapping("/checkAdmin")
+  public ResponseEntity<Void> checkAdmin(@RequestParam String email) {
+    boolean isAdmin = service.isAdmin(email);
+    if (isAdmin) {
+      return ResponseEntity.ok().build();
+    } else {
+      return ResponseEntity.badRequest().build();
+    }
+  }
+
 
 
 }

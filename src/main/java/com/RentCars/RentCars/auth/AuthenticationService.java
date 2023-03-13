@@ -186,12 +186,19 @@ public class AuthenticationService {
             .email(user.getEmail())
             .address(user.getAddress())
             .phone(user.getPhone())
+            .role(user.getRole().toString())
             .build();
 
   }
 
   public boolean isEmailExists(String email) {
     return repository.findByEmail(email).isPresent();
+  }
+
+  public boolean isAdmin(String email) {
+    var user = repository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+    return user.getRole().toString().equals(Role.ADMIN.toString());
   }
 
 

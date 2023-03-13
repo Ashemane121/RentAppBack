@@ -16,4 +16,5 @@ public class GetUserByEmailResponse {
     private String email;
     private String address;
     private Integer phone;
+    private String role;
 }

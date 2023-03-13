@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                     "/api/auth/register",
                     "/api/auth/authenticate",
                     "/api/auth/checkEmail",
+                    "/api/auth/checkAdmin",
                     "/api/auth/admin/**",
                     "/api/posts/get/**"
             ).permitAll()
