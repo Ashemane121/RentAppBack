@@ -15,6 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -189,6 +192,20 @@ public class AuthenticationService {
             .role(user.getRole().toString())
             .build();
 
+  }
+
+  public List<GetUserByEmailResponse> getAllUsers() {
+
+    return repository.findAll().stream()
+            .map(user -> GetUserByEmailResponse.builder()
+                    .firstname(user.getFirstname())
+                    .lastname(user.getLastname())
+                    .email(user.getEmail())
+                    .address(user.getAddress())
+                    .phone(user.getPhone())
+                    .role(user.getRole().toString())
+                    .build())
+            .collect(Collectors.toList());
   }
 
   public boolean isEmailExists(String email) {

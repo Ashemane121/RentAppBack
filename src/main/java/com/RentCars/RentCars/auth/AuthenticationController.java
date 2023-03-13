@@ -5,9 +5,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -90,6 +93,16 @@ public class AuthenticationController {
   public ResponseEntity<GetUserByEmailResponse> getUserByEmail(@RequestParam String email) {
     return ResponseEntity.ok(service.getUserByEmail(email));
   }
+
+  @GetMapping("/users")
+  @PreAuthorize("isAuthenticated()")
+  public List<GetUserByEmailResponse> getAllUsers(@RequestParam String email) {
+    if (!service.isAdmin(email)) {
+      throw new AccessDeniedException("Only users with ADMIN role can access this endpoint");
+    }
+    return service.getAllUsers();
+  }
+
 
   @GetMapping("/checkEmail")
   public ResponseEntity<Void> checkEmail(@RequestParam String email) {
