@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetUserByEmailResponse {
 
+    private Long id;
     private String firstname;
     private String lastname;
     private String email;

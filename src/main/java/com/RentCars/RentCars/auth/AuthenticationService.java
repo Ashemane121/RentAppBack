@@ -184,6 +184,7 @@ public class AuthenticationService {
 
     //Get user's properties
     return GetUserByEmailResponse.builder()
+            .id(user.getId())
             .firstname(user.getFirstname())
             .lastname(user.getLastname())
             .email(user.getEmail())
@@ -198,6 +199,7 @@ public class AuthenticationService {
 
     return repository.findAll().stream()
             .map(user -> GetUserByEmailResponse.builder()
+                    .id(user.getId())
                     .firstname(user.getFirstname())
                     .lastname(user.getLastname())
                     .email(user.getEmail())
