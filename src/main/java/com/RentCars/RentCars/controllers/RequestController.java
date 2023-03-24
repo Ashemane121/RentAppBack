@@ -48,8 +48,6 @@ public class RequestController {
         return new ResponseEntity<>(requests, HttpStatus.OK);
     }
 
-
-
     @GetMapping("/post/{postId}")
     public ResponseEntity<List<Request>> getRequestsByPost(@PathVariable Long postId) {
         Post post = new Post();
@@ -64,10 +62,16 @@ public class RequestController {
         return new ResponseEntity<>(requests, HttpStatus.OK);
     }
 
-    @PostMapping("/{userId}/{carId}")
-    public ResponseEntity<Void> createRequest(@RequestBody Request request , @PathVariable Long userId, @PathVariable Long carId) {
+    @PostMapping("/{userId}/{postId}")
+    public ResponseEntity<Void> createRequest(@RequestBody Request request , @PathVariable Long userId, @PathVariable Long postId) {
         User user=userService.getUserById(userId);
-        Post post = postService.getPostById(carId);
+        Post post = postService.getPostById(postId);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (post == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         request.setUser(user);
         request.setPost(post);
         requestService.createRequest(request);

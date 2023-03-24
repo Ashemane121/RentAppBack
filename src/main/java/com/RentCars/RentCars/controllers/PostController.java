@@ -33,9 +33,18 @@ public class PostController {
         return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Post>> getPostsByUser(@PathVariable Long userId) {
+        List<Post> posts = postService.getPostsByUser(userId);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
     @PostMapping("/{userId}")
     public ResponseEntity<Void> savePostWithUser(@RequestBody Post post, @PathVariable Long userId) {
-        User user=userService.getUserById(userId);
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         post.setUser(user);
         postService.savePost(post);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -66,14 +75,6 @@ public class PostController {
         postService.deletePost(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Post>> getPostsByUser(@PathVariable Long userId) {
-        List<Post> posts = postService.getPostsByUser(userId);
-        return new ResponseEntity<>(posts, HttpStatus.OK);
-    }
-
-
 
 
 }
