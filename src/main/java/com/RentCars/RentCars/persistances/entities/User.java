@@ -42,6 +42,9 @@ public class User implements UserDetails {
   @Enumerated(EnumType.STRING)
   private Role role;
 
+  @Column
+  private String profile_picture_url;
+
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;
 

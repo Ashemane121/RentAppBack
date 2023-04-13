@@ -80,6 +80,14 @@ public class AuthenticationController {
     return ResponseEntity.ok(service.updatePassword(request));
   }
 
+  @PostMapping("/updateProfilePictureUrl")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<AuthenticationResponse> updateProfilePictureUrl(
+          @RequestBody UpdateProfilePictureUrlRequest request
+  ) {
+    return ResponseEntity.ok(service.updateProfilePictureUrl(request));
+  }
+
   @DeleteMapping("/deleteAccount")
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<?> deleteAccount(Authentication authentication) {

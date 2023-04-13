@@ -171,6 +171,26 @@ public class AuthenticationService {
             .build();
   }
 
+  public AuthenticationResponse updateProfilePictureUrl(UpdateProfilePictureUrlRequest request) {
+    // Find the user by email
+    var user = repository.findByEmail(request.getEmail())
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+    // Update the user's profile picture
+    user.setProfile_picture_url(request.getProfilePictureUrl());
+    // Save the updated user details
+    var savedUser = repository.save(user);
+    // Revoke all the user's existing tokens
+    revokeAllUserTokens(user);
+    // Generate a new token for the user
+    var jwtToken = jwtService.generateToken(user);
+    // Save the token in the database
+    saveUserToken(savedUser, jwtToken);
+    // Return the authentication response containing the new token
+    return AuthenticationResponse.builder()
+            .token(jwtToken)
+            .build();
+  }
+
   public void deleteAccount(String email) {
     var user = repository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
