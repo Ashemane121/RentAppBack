@@ -22,11 +22,9 @@ public class Rental {
 
     @OneToOne
     @JoinColumn(name = "request_id")
-    @JsonIgnore
     private Request request;
 
     @OneToOne
     @JoinColumn(name = "rating_id")
-    @JsonIgnore
     private Rating rating;
 }

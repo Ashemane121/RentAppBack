@@ -34,6 +34,9 @@ public class Request {
     @Column(nullable = false)
     private String payment_method;
 
+    @Column(nullable = false)
+    private String user_email;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonIgnore
@@ -41,7 +44,6 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name = "post_id")
-    @JsonIgnore
     private Post post;
 
     @OneToOne(mappedBy = "request")

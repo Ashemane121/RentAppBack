@@ -31,7 +31,7 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public List<Rental> getRentalByRequest(Long requestId) {
+    public Rental getRentalByRequest(Long requestId) {
         Request request = new Request();
         request.setId_request(requestId);
         return rentalRepository.findByRequest(request);

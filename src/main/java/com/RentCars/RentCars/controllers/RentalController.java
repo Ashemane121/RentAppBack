@@ -40,11 +40,11 @@ public class RentalController {
     }
 
     @GetMapping("/request/{requestId}")
-    public ResponseEntity<List<Rental>> getRentalByRequest(@PathVariable Long requestId) {
+    public ResponseEntity<Rental> getRentalByRequest(@PathVariable Long requestId) {
         // Request request = new Request();
         // request.setId_request(requestId);
-        List<Rental> rentals = rentalService.getRentalByRequest(requestId);
-        return new ResponseEntity<>(rentals, HttpStatus.OK);
+        Rental rental = rentalService.getRentalByRequest(requestId);
+        return new ResponseEntity<>(rental, HttpStatus.OK);
     }
 
     @PostMapping("/{requestId}")

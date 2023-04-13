@@ -62,6 +62,16 @@ public class RequestController {
         return new ResponseEntity<>(requests, HttpStatus.OK);
     }
 
+    @GetMapping("/{requestId}/post")
+    public ResponseEntity<Post> getPostById(@PathVariable Long requestId) {
+        Request request = requestService.getRequestById(requestId);
+        if (request == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Post post = request.getPost();
+        return new ResponseEntity<>(post, HttpStatus.OK);
+    }
+
     @PostMapping("/{userId}/{postId}")
     public ResponseEntity<Void> createRequest(@RequestBody Request request , @PathVariable Long userId, @PathVariable Long postId) {
         User user=userService.getUserById(userId);
@@ -73,6 +83,7 @@ public class RequestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         request.setUser(user);
+        request.setUser_email(user.getEmail());
         request.setPost(post);
         requestService.createRequest(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
