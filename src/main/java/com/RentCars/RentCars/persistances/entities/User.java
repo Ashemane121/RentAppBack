@@ -43,7 +43,7 @@ public class User implements UserDetails {
   private Role role;
 
   @Column
-  private String profile_picture_url;
+  private String profile_picture;
 
   @OneToMany(mappedBy = "user")
   private List<Token> tokens;

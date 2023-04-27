@@ -22,7 +22,10 @@ public class Identity {
     private Long id_identity;
 
     @Column
-    private String path;
+    private String image;
+
+    @Column
+    private String type;
 
     @Column
     private String status;

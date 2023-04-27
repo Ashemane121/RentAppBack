@@ -46,6 +46,10 @@ public class Post {
     private Double price;
 
     @Column
+    @ElementCollection
+    private List<String> images;
+
+    @Column
     private Boolean availability;
 
     @Column

@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -171,12 +172,12 @@ public class AuthenticationService {
             .build();
   }
 
-  public AuthenticationResponse updateProfilePictureUrl(UpdateProfilePictureUrlRequest request) {
+  public AuthenticationResponse updateProfilePicture(UpdateProfilePictureRequest request) {
     // Find the user by email
     var user = repository.findByEmail(request.getEmail())
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
     // Update the user's profile picture
-    user.setProfile_picture_url(request.getProfilePictureUrl());
+    user.setProfile_picture(request.getProfilePicture());
     // Save the updated user details
     var savedUser = repository.save(user);
     // Revoke all the user's existing tokens
@@ -211,9 +212,11 @@ public class AuthenticationService {
             .address(user.getAddress())
             .phone(user.getPhone())
             .role(user.getRole().toString())
+            .profilePicture(user.getProfile_picture())
             .build();
 
   }
+
 
   public List<GetUserByEmailResponse> getAllUsers() {
 
@@ -226,6 +229,7 @@ public class AuthenticationService {
                     .address(user.getAddress())
                     .phone(user.getPhone())
                     .role(user.getRole().toString())
+                    .profilePicture(user.getProfile_picture())
                     .build())
             .collect(Collectors.toList());
   }

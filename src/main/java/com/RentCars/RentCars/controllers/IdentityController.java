@@ -56,7 +56,8 @@ public class IdentityController {
         if (existingIdentity == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        existingIdentity.setPath(identity.getPath());
+        existingIdentity.setImage(identity.getImage());
+        existingIdentity.setType(identity.getType());
         existingIdentity.setStatus(identity.getStatus());
         identityService.updateIdentity(existingIdentity);
         return new ResponseEntity<>(HttpStatus.OK);
