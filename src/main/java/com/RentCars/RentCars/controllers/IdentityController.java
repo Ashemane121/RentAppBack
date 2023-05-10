@@ -37,6 +37,11 @@ public class IdentityController {
         }
     }
 
+    @GetMapping("/user/{userId}")
+    public List<Identity> getIdentitiesByUser(@PathVariable Long userId) {
+        return identityService.getIdentitiesByUser(userId);
+    }
+
     @PostMapping
     public void saveIdentity(@RequestBody Identity identity) {
         identityService.saveIdentity(identity);
@@ -56,7 +61,7 @@ public class IdentityController {
         if (existingIdentity == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        existingIdentity.setImage(identity.getImage());
+        existingIdentity.setRef(identity.getRef());
         existingIdentity.setType(identity.getType());
         existingIdentity.setStatus(identity.getStatus());
         identityService.updateIdentity(existingIdentity);
@@ -74,8 +79,4 @@ public class IdentityController {
         }
     }
 
-    @GetMapping("/users/{userId}")
-    public List<Identity> getIdentitiesByUser(@PathVariable Long userId) {
-        return identityService.getIdentitiesByUser(userId);
-    }
 }

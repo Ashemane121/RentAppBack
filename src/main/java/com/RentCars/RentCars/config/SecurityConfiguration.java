@@ -38,7 +38,8 @@ public class SecurityConfiguration {
                     "/api/auth/checkEmail",
                     "/api/auth/checkAdmin",
                     "/api/auth/admin/**",
-                    "/api/posts/get/**"
+                    "/api/posts/get/**",
+                    "/api/images/ref/**"
             ).permitAll()
             .anyRequest().authenticated()
             .and()

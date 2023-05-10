@@ -22,6 +22,9 @@ public class Post {
     private Long id_post;
 
     @Column
+    private String mat;
+
+    @Column
     private String brand;
 
     @Column
@@ -35,6 +38,9 @@ public class Post {
 
     @Column
     private String description;
+
+    @Column
+    private String conditions;
 
     @Column
     private String gearbox;

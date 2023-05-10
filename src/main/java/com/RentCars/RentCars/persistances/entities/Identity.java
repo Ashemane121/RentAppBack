@@ -22,7 +22,7 @@ public class Identity {
     private Long id_identity;
 
     @Column
-    private String image;
+    private String ref;
 
     @Column
     private String type;
