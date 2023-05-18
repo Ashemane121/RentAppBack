@@ -96,6 +96,15 @@ public class AuthenticationController {
     return ResponseEntity.ok().build();
   }
 
+  @GetMapping("/userId")
+  @PreAuthorize("isAuthenticated()")
+  public ResponseEntity<GetUserByEmailResponse> getUserById(@RequestParam String email, @RequestParam Long id) {
+    if (!service.isAdmin(email)) {
+      throw new AccessDeniedException("Only users with ADMIN role can access this endpoint");
+    }
+    return ResponseEntity.ok(service.getUserById(id));
+  }
+
   @GetMapping("/user")
   @PreAuthorize("isAuthenticated()")
   public ResponseEntity<GetUserByEmailResponse> getUserByEmail(@RequestParam String email) {

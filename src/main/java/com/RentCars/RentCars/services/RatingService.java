@@ -1,11 +1,13 @@
 package com.RentCars.RentCars.services;
 
 import com.RentCars.RentCars.persistances.entities.Rating;
+import com.RentCars.RentCars.persistances.entities.Rental;
 
 import java.util.List;
 
 public interface RatingService {
     Rating getRatingById(Long id);
+    Rating getRatingByRental(Long rentalId);
     Rating createRating(Rating rating);
     Rating updateRating(Rating rating);
     List<Rating> getAllRating() ;

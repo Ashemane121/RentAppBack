@@ -199,6 +199,21 @@ public class AuthenticationService {
     revokeAllUserTokens(user);
   }
 
+  public GetUserByEmailResponse getUserById(Long id) {
+    var user = repository.findById(id)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));
+    //Get user's properties
+    return GetUserByEmailResponse.builder()
+            .id(user.getId())
+            .firstname(user.getFirstname())
+            .lastname(user.getLastname())
+            .email(user.getEmail())
+            .address(user.getAddress())
+            .phone(user.getPhone())
+            .role(user.getRole().toString())
+            .profilePicture(user.getProfile_picture())
+            .build();
+  }
   public GetUserByEmailResponse getUserByEmail(String email) {
     var user = repository.findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));

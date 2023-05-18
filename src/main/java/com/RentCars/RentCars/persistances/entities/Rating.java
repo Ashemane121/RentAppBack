@@ -23,7 +23,8 @@ public class Rating {
     @Column
     private String comment;
 
-    @OneToOne(mappedBy = "rating")
+    @OneToOne
+    @JoinColumn(name = "rental_id")
     @JsonIgnore
     private Rental rental;
 

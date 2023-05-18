@@ -24,7 +24,6 @@ public class Rental {
     @JoinColumn(name = "request_id")
     private Request request;
 
-    @OneToOne
-    @JoinColumn(name = "rating_id")
+    @OneToOne(mappedBy = "rental")
     private Rating rating;
 }

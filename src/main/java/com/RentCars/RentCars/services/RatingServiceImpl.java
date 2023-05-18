@@ -1,6 +1,7 @@
 package com.RentCars.RentCars.services;
 
 import com.RentCars.RentCars.persistances.entities.Rating;
+import com.RentCars.RentCars.persistances.entities.Rental;
 import com.RentCars.RentCars.persistances.repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,13 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public Rating getRatingById(Long id) {
         return ratingRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Rating getRatingByRental(Long rentalId) {
+        Rental rental= new Rental();
+        rental.setId_rental(rentalId);
+        return ratingRepository.findByRental(rental);
     }
 
     @Override

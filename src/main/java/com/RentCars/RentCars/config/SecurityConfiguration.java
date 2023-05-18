@@ -39,6 +39,8 @@ public class SecurityConfiguration {
                     "/api/auth/checkAdmin",
                     "/api/auth/admin/**",
                     "/api/posts/get/**",
+                    "/api/rentals/get/**",
+                    "/api/ratings/get/**",
                     "/api/images/ref/**"
             ).permitAll()
             .anyRequest().authenticated()
