@@ -12,21 +12,23 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rental {
+public class Claim {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_rental;
+    private Long id_claim;
+
+    @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
+    private String subject;
 
     @Column(nullable = false)
     private String status;
 
     @OneToOne
-    @JoinColumn(name = "request_id")
-    private Request request;
+    @JoinColumn(name = "rental_id")
+    @JsonIgnore
+    private Rental rental;
 
-    @OneToOne(mappedBy = "rental")
-    private Rating rating;
-
-    @OneToOne(mappedBy = "rental")
-    private Claim claim;
 }
