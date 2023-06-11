@@ -1,9 +1,7 @@
 package com.RentCars.RentCars.services;
 
-import com.RentCars.RentCars.persistances.entities.Post;
 import com.RentCars.RentCars.persistances.entities.Rental;
 import com.RentCars.RentCars.persistances.entities.Request;
-import com.RentCars.RentCars.persistances.entities.User;
 import com.RentCars.RentCars.persistances.repositories.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

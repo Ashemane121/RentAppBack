@@ -1,11 +1,11 @@
 package com.RentCars.RentCars.auth;
 
 import com.RentCars.RentCars.config.JwtService;
-import com.RentCars.RentCars.persistances.entities.Token;
-import com.RentCars.RentCars.persistances.repositories.TokenRepository;
-import com.RentCars.RentCars.persistances.entities.TokenType;
 import com.RentCars.RentCars.persistances.entities.Role;
+import com.RentCars.RentCars.persistances.entities.Token;
+import com.RentCars.RentCars.persistances.entities.TokenType;
 import com.RentCars.RentCars.persistances.entities.User;
+import com.RentCars.RentCars.persistances.repositories.TokenRepository;
 import com.RentCars.RentCars.persistances.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +27,7 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
+  private static final String USER_NOT_FOUND_WITH_EMAIL="User not found with email: ";
   public AuthenticationResponse register(RegisterRequest request) {
     // Check if the email is already used
     if (repository.findByEmail(request.getEmail()).isPresent()) {
@@ -111,11 +111,10 @@ public class AuthenticationService {
   public AuthenticationResponse update(UpdateRequest request) {
     // Find the user by email
     var user = repository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + request.getEmail()));
     // Update the user details
     user.setFirstname(request.getFirstname());
     user.setLastname(request.getLastname());
-    // user.setPassword(passwordEncoder.encode(request.getPassword()));
     user.setPhone(request.getPhone());
     user.setAddress(request.getAddress());
     // Save the updated user details
@@ -135,7 +134,7 @@ public class AuthenticationService {
   public AuthenticationResponse updateEmail(UpdateEmailRequest request) {
     // Find the user by email
     var user = repository.findByEmail(request.getOldEmail())
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getOldEmail()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + request.getOldEmail()));
     // Update the user's email
     user.setEmail(request.getNewEmail());
     // Save the updated user details
@@ -155,7 +154,7 @@ public class AuthenticationService {
   public AuthenticationResponse updatePassword(UpdatePasswordRequest request) {
     // Find the user by email
     var user = repository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + request.getEmail()));
     // Update the user's password
     user.setPassword(passwordEncoder.encode(request.getNewPassword()));
     // Save the updated user details
@@ -175,7 +174,7 @@ public class AuthenticationService {
   public AuthenticationResponse updateProfilePicture(UpdateProfilePictureRequest request) {
     // Find the user by email
     var user = repository.findByEmail(request.getEmail())
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + request.getEmail()));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + request.getEmail()));
     // Update the user's profile picture
     user.setProfile_picture(request.getProfilePicture());
     // Save the updated user details
@@ -194,7 +193,7 @@ public class AuthenticationService {
 
   public void deleteAccount(String email) {
     var user = repository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + email));
     repository.delete(user);
     revokeAllUserTokens(user);
   }
@@ -216,7 +215,7 @@ public class AuthenticationService {
   }
   public GetUserByEmailResponse getUserByEmail(String email) {
     var user = repository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + email));
 
     //Get user's properties
     return GetUserByEmailResponse.builder()
@@ -255,7 +254,7 @@ public class AuthenticationService {
 
   public boolean isAdmin(String email) {
     var user = repository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+            .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL + email));
     return user.getRole().toString().equals(Role.ADMIN.toString());
   }
 

@@ -1,7 +1,6 @@
 package com.RentCars.RentCars.services;
 
 import com.RentCars.RentCars.persistances.entities.Identity;
-import com.RentCars.RentCars.persistances.entities.User;
 import com.RentCars.RentCars.persistances.repositories.IdentityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
