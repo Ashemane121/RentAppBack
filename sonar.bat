@@ -1,0 +1,1 @@
+mvn clean verify sonar:sonar -Dsonar.projectKey=rentcars -Dsonar.projectName='rentcars' -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_5f0366408eae4534e52043e6b1af49315938bb3a -DskipTests
